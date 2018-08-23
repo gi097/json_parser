@@ -1,0 +1,16 @@
+name: json_parser
+description: A generic JSON parser for Flutter using reflection.
+version: 0.0.1
+author: Giovanni Terlingen
+homepage: https://github.com/gi097/json_parser
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  reflectable: any
+  build_runner: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
