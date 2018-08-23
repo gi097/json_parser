@@ -8,7 +8,7 @@ First of all add the following dependencies to your `pubspec.yaml`:
 
 ```
 dependencies:
-  json_parser: any
+  json_parser: 0.0.1
   build_runner: 0.8.3
 ```
 
