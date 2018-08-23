@@ -35,7 +35,7 @@ targets:
 `lib/main.dart` points to the location of the Dart class containing the `main()`
 method entry of your application.
 
-Then open upyour terminal in your project root and type the following:
+Then open up your terminal in your project root and type the following:
 
 ```bash
 flutter packages pub run lib/main.dart build
@@ -44,7 +44,7 @@ flutter packages pub run lib/main.dart build
 As mentioned before, `lib/main.dart` specifies the folder name of the location of
 the class containing the `main()` entry. Usually in Flutter applications this is
 the `/lib` folder. If all goes well, you will see a generated `.reflectable.dart`
-file. Import this in your `main()` entry class.
+file. Import the generated class in your `main()` entry class.
 
 In order to make the mapping work, you need to create a new Dart object which
 has the same property names as your JSON. We are using the following example:
