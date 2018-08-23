@@ -12,12 +12,10 @@ dependencies:
   build_runner: 0.8.3
 ```
 
-Every Flutter/Dart application has a `main()` entry point. In that class and method
+Every Flutter/Dart application has a `main()` entry point. In that method
 you need to add at least the following:
 
 ```dart
-import 'package:reflectable/reflectable.dart';
-
 void main() {
   initializeReflectable();
 }

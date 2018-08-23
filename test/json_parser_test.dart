@@ -9,9 +9,6 @@ import 'package:json_parser/json_parser.dart';
 import 'data_class.dart';
 import 'json_parser_test.reflectable.dart';
 
-/// You MUST import reflectable to support code generation
-import 'package:reflectable/reflectable.dart';
-
 void main() {
   initializeReflectable();
 
