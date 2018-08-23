@@ -96,6 +96,8 @@ You can also parse JSON arrays with a given type. However this is a bit more
 complex due limitations on Dart and Flutter:
 
 ```dart
+String json = '[{ "name":"John", "age":30, "car":null },'
+   '{ "name":"Giovanni", "age":20, "car":"Volkswagen" }]';
 List<DataClass> buffer = new List<DataClass>();
 int itemCount = JsonParser.getJArrayCount(json);
 for (int i = 0; i < itemCount; i++) {
