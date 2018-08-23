@@ -4,6 +4,14 @@ This project is an attempt to make reflection work on Flutter. Using reflection 
 are able to parse a JSON string and map it's values to an instance of a Dart object.
 
 ## Getting started
+First of all add the following dependencies to your `pubspec.yaml`:
+
+```
+dependencies:
+  json_parser: any
+  build_runner: any
+```
+
 Every Flutter/Dart application has a `main()` entry point. In that class and method
 you need to add at least the following:
 
@@ -18,7 +26,7 @@ void main() {
 You will see that the method `initializeReflectable()` is not declared. That is
 fine, since you need to generate a code file first.
 
-First create a `build.yml` file in your Flutter application project. Then add the
+First create a `build.yaml` file in your Flutter application project. Then add the
 following content:
 
 ```
