@@ -17,10 +17,31 @@ import 'package:reflectable/mirrors.dart';
 class JsonParser {
   /// Parses the json and places all values of the properties in the correct
   /// location of the instance.
-  static void parseFromJsonString<T>(String input, T instance) {
+  static void parseJObject<T>(String input, T instance) {
     InstanceMirror instanceMirror = reflectable.reflect(instance);
     Map<String, dynamic> converted = jsonDecode(input);
-    // TODO: Test support for lists/arrays
     converted.forEach((k, v) => instanceMirror.invokeSetter(k, v));
+  }
+
+  /// Consumes a list and parses the json and places all values of the
+  /// properties in the correct location of the instance.
+  /// Buffer is expected to contain the proper amount of items.
+  static void parseJArray<T>(String input, List<T> buffer) {
+    List<dynamic> converted = jsonDecode(input);
+    assert(converted.length == buffer.length);
+
+    for (int i = 0; i < converted.length; i++) {
+      InstanceMirror instanceMirror = reflectable.reflect(buffer[i]);
+      converted[i].forEach((k, v) {
+        instanceMirror.invokeSetter(k, v);
+      });
+    }
+  }
+
+  /// Useful method for a caller to determine how much items the buffer needs
+  /// to contain.
+  static int getJArrayCount(String input) {
+    List<dynamic> converted = jsonDecode(input);
+    return converted.length;
   }
 }

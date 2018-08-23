@@ -86,12 +86,24 @@ using the following method:
 ```dart
 DataClass instance = new DataClass();
 String json = '{ "name":"John", "age":30, "car":null }';
-JsonParser.parseFromJsonString<DataClass>(json, instance);
+JsonParser.parseJObject<DataClass>(json, instance);
 ```
 
 If all goes well, `instance` will automatically contain all your values specified
 in the JSON.
 
+You can also parse JSON arrays with a given type. However this is a bit more 
+complex due limitations on Dart and Flutter:
+
+```dart
+List<DataClass> buffer = new List<DataClass>();
+int itemCount = JsonParser.getJArrayCount(json);
+for (int i = 0; i < itemCount; i++) {
+   buffer.add(new DataClass());
+}
+JsonParser.parseJArray<DataClass>(json, buffer);
+```
+
 ## TODO's
-Currently the parser is only being tested on `String` and `int` types. Later
-we will add support for more complex types such as arrays and nested objects.
+Currently the parser is only being tested on primitive properties. Later
+we will test and add support for more complex types such as nested objects.
