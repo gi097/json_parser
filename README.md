@@ -46,7 +46,7 @@ method entry of your application.
 Then open up your terminal in your project root and type the following:
 
 ```bash
-flutter packages pub run lib/main.dart build
+flutter packages pub run build_runner build
 ```
 
 As mentioned before, `lib/main.dart` specifies the folder name of the location of
