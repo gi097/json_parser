@@ -15,6 +15,10 @@ dart --version
 
 ../flutter/bin/flutter packages get
 
+echo "Generating code for reflection."
+
+../flutter/bin/flutter packages pub run test/json_parser_test.dart build
+
 echo "Analyzing the extracted Dart libraries."
 
 ../flutter/bin/flutter analyze lib test
