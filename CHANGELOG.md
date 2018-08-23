@@ -1,3 +1,6 @@
+## [0.0.3] - 23-08-2018
+* Add support for parsing simple arrays.
+
 ## [0.0.2] - 23-08-2018
 * Improve the README, fixes some errors.
 
