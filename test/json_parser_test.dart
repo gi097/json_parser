@@ -68,4 +68,18 @@ void main() {
     expect("Volkswagen", buffer[1].car);
     expect(9, buffer[1].marks[0].mark);
   });
+
+  test('test an invalid json input', () {
+    int json = 0;
+    bool exception = false;
+
+    try {
+      JsonParser parser = new JsonParser();
+      parser.parseJson<DataClass>(json);
+    } catch(e) {
+      exception = e is UnsupportedError;
+    }
+
+    expect(true, exception);
+  });
 }

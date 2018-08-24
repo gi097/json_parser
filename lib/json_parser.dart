@@ -35,8 +35,6 @@ class JsonParser {
       parsed = jsonDecode(input);
     } else if (input is List) {
       parsed = input;
-    } else if (input is Map) {
-      return _parseJsonObjectInternal(input, type);
     } else {
       throw new UnsupportedError('The specified JSON input type is invalid.');
     }
@@ -58,8 +56,6 @@ class JsonParser {
       parsed = jsonDecode(input);
     } else if (input is Map) {
       parsed = input;
-    } else {
-      throw new UnsupportedError('The specified JSON input type is invalid.');
     }
 
     ClassMirror classMirror = reflectable.reflectType(type);
