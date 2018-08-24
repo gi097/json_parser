@@ -50,7 +50,7 @@ class JsonParser {
     return buffer;
   }
 
-  dynamic _parseJsonObjectInternal(dynamic input, Type type) {
+  dynamic _parseJsonObjectInternal(Map input, Type type) {
     ClassMirror classMirror = reflectable.reflectType(type);
     dynamic instance = classMirror.newInstance("", []);
 
