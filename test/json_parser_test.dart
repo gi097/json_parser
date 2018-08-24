@@ -23,6 +23,15 @@ void main() {
     expect(null, instance.car);
   });
 
+  test('tests byte data', () {
+    String json = '{ "data":"QmFzZTY0IGlzIHdvcmtpbmch" }';
+
+    JsonParser parser = new JsonParser();
+    DataClass instance = parser.parseJson<DataClass>(json);
+
+    expect("Base64 is working!", String.fromCharCodes(instance.data));
+  });
+
   test('test a json array', () {
     String json = '[{ "name":"John", "age":30, "car":null },'
         '{ "name":"Giovanni", "age":20, "car":"Volkswagen" }]';

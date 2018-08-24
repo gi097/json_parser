@@ -69,13 +69,15 @@ has the same property names as your JSON. We are using the following example:
 Then we will use the following Dart class:
 
 ```dart
+import 'dart:typed_data';
 import 'package:json_parser/reflectable.dart';
 
 @reflectable
 class DataClass {
-  String name;
-  int age;
-  String car;
+  String name = "";
+  int age = 0;
+  String car = "";
+  Uint8List data = new Uint8List(0);
 
   List<Mark> _marks = [];
   List<Mark> get marks => _marks;
@@ -86,14 +88,15 @@ class DataClass {
 
 @reflectable
 class Mark {
-  int mark;
+  int mark = 0;
 }
 ```
 
 Note the usage of `@reflectable`. All your classes which will be used for JSON
-parsing need to use this annotation. Also take a look at how lists are
-initialized. It's important to make an instance of the list and to add the cast
-method to let the parser work.
+parsing need to use this annotation. Also take a look at how lists and other properties
+are initialized. For lists it's important to make an instance of the list and to add the cast
+method to let the parser work. All other properties needs to be initialized with a default value
+as well to make reflection work properly.
 
 Then you are all set and able to start the parsing. You can parse a JSON string
 using the following method:

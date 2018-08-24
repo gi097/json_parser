@@ -3,14 +3,16 @@
 /// Created by Giovanni Terlingen
 /// See LICENSE file for more information.
 ///
+import 'dart:typed_data';
 import 'package:json_parser/reflectable.dart';
 
 /// DataClass contains all properties which we declare in our json
 @reflectable
 class DataClass {
-  String name;
-  int age;
-  String car;
+  String name = "";
+  int age = 0;
+  String car = "";
+  Uint8List data = new Uint8List(0);
 
   /// You need to define lists like this. The cast method casts List<dynamic>
   /// to the correct type
@@ -23,5 +25,5 @@ class DataClass {
 
 @reflectable
 class Mark {
-  int mark;
+  int mark = 0;
 }

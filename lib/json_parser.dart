@@ -73,14 +73,20 @@ class JsonParser {
       // List instance, we need to compare it to the declared reflectable
       // items. If we find a match, we get the type of that subtype of a List.
       // TODO: Make this better
+      var property = instanceMirror.invokeGetter(k);
+
       if (v is List) {
         classes.forEach((key, val) {
-          List list = instanceMirror.invokeGetter(k);
-          if ('List<$key>' == list.runtimeType.toString()) {
+          if ('List<$key>' == property.runtimeType.toString()) {
             dynamic t = val.newInstance("", []);
             v = _parseJson(v, t.runtimeType);
           }
         });
+      }
+
+      // Decode base64, we can only check types using strings...
+      if ('Uint8List' == property.runtimeType.toString()) {
+        v = base64Decode(v);
       }
 
       instanceMirror.invokeSetter(k, v);
