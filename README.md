@@ -69,7 +69,6 @@ has the same property names as your JSON. We are using the following example:
 Then we will use the following Dart class:
 
 ```dart
-import 'dart:typed_data';
 import 'package:json_parser/reflectable.dart';
 
 @reflectable
