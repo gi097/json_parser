@@ -1,3 +1,7 @@
+## [0.1.2] - 24-08-2018
+* Several code cleanups
+* Improved README
+
 ## [0.1.1] - 24-08-2018
 * Added support for Base64 (binary data)
 

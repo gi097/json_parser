@@ -1,6 +1,6 @@
 name: json_parser
-description: A generic JSON parser for Flutter using reflection.
-version: 0.1.1
+description: A JSON parser with auto object mapping for Flutter using reflection.
+version: 0.1.2
 author: Giovanni Terlingen <me@giovanniterlingen.com>
 homepage: https://github.com/gi097/json_parser
 
