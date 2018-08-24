@@ -15,34 +15,44 @@ import 'package:reflectable/mirrors.dart';
 /// JsonParser will then try to set the values for all the specified
 /// properties.
 class JsonParser {
+  final Map<String, ClassMirror> classes = <String, ClassMirror>{};
+
+  JsonParser() {
+    for (ClassMirror classMirror in reflectable.annotatedClasses) {
+      classes[classMirror.simpleName] = classMirror;
+    }
+  }
 
   /// Consumes a json object and parses it if needed. It will place all
   /// values of the properties in the correct location of a new instance.
-  static dynamic parseJson<T>(dynamic input) {
+  dynamic parseJson<T>(dynamic input) {
+    return _parseJson(input, T);
+  }
+
+  dynamic _parseJson(dynamic input, Type type) {
     dynamic parsed;
     if (input is String) {
       parsed = jsonDecode(input);
     } else if (input is List) {
       parsed = input;
     } else if (input is Map) {
-      return _parseJsonObjectInternal<T>(input);
+      return _parseJsonObjectInternal(input, type);
     } else {
       throw new UnsupportedError('The specified JSON input type is invalid.');
     }
 
     if (parsed is Map) {
-      return _parseJsonObjectInternal<T>(parsed);
+      return _parseJsonObjectInternal(parsed, type);
     }
 
-    List<T> buffer = new List(parsed.length);
+    List buffer = new List(parsed.length);
     for (int i = 0; i < parsed.length; i++) {
-      buffer[i] = _parseJsonObjectInternal<T>(parsed[i]);
+      buffer[i] = _parseJsonObjectInternal(parsed[i], type);
     }
-
     return buffer;
   }
 
-  static dynamic _parseJsonObjectInternal<T>(dynamic input) {
+  dynamic _parseJsonObjectInternal(dynamic input, Type type) {
     Map<String, dynamic> parsed;
     if (input is String) {
       parsed = jsonDecode(input);
@@ -52,15 +62,27 @@ class JsonParser {
       throw new UnsupportedError('The specified JSON input type is invalid.');
     }
 
-    ClassMirror classMirror = reflectable.reflectType(T);
-    T instance = classMirror.newInstance("", null);
+    ClassMirror classMirror = reflectable.reflectType(type);
+    dynamic instance = classMirror.newInstance("", []);
 
     // Map values to the specified instance of the object.
     InstanceMirror instanceMirror = reflectable.reflect(instance);
     parsed.forEach((k, v) {
+      // This is a very ugly workaround since Dart has lots of limitations
+      // regarding to types in Lists. Since we can only get a full name of a
+      // List instance, we need to compare it to the declared reflectable
+      // items. If we find a match, we get the type of that subtype of a List.
+      // TODO: Make this better
       if (v is List) {
-        // TODO: get the type of a list inside the instance
+        classes.forEach((key, val) {
+          List list = instanceMirror.invokeGetter(k);
+          if ('List<$key>' == list.runtimeType.toString()) {
+            dynamic t = val.newInstance("", []);
+            v = _parseJson(v, t.runtimeType);
+          }
+        });
       }
+
       instanceMirror.invokeSetter(k, v);
     });
 

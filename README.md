@@ -13,7 +13,7 @@ First of all add the following dependencies to your `pubspec.yaml`:
 
 ```
 dependencies:
-  json_parser: any
+  json_parser: 0.1.0
   build_runner: 0.8.3
 ```
 
@@ -52,6 +52,8 @@ Then open up your terminal in your project root and type the following:
 flutter packages pub run build_runner build
 ```
 
+Do this every time you make a change in some of the reflectable classes.
+
 As mentioned before, `lib/main.dart` specifies the folder name of the location of
 the class containing the `main()` entry. Usually in Flutter applications this is
 the `/lib` folder. If all goes well, you will see a generated `.reflectable.dart`
@@ -74,11 +76,24 @@ class DataClass {
   String name;
   int age;
   String car;
+
+  List<Mark> _marks = [];
+  List<Mark> get marks => _marks;
+  set marks(List list) {
+    _marks = list.cast<Mark>();
+  }
+}
+
+@reflectable
+class Mark {
+  int mark;
 }
 ```
 
 Note the usage of `@reflectable`. All your classes which will be used for JSON
-parsing need to use this annotation.
+parsing need to use this annotation. Also take a look at how lists are
+initialized. It's important to make an instance of the list and to add the cast
+method to let the parser work.
 
 Then you are all set and able to start the parsing. You can parse a JSON string
 using the following method:
@@ -86,6 +101,8 @@ using the following method:
 ```dart
 DataClass instance = JsonParser.parseJson<DataClass>(json);
 ```
+
+Note that you **MUST** specify a type when calling the parse method.
 
 If all goes well, `instance` will automatically contain all your values specified
 in the JSON.
