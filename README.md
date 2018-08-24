@@ -77,26 +77,14 @@ class DataClass {
   String name = "";
   int age = 0;
   String car = "";
-  Uint8List data = new Uint8List(0);
-
-  List<Mark> _marks = [];
-  List<Mark> get marks => _marks;
-  set marks(List list) {
-    _marks = list.cast<Mark>();
-  }
-}
-
-@reflectable
-class Mark {
-  int mark = 0;
 }
 ```
 
 Note the usage of `@reflectable`. All your classes which will be used for JSON
-parsing need to use this annotation. Also take a look at how lists and other properties
-are initialized. For lists it's important to make an instance of the list and to add the cast
-method to let the parser work. All other properties needs to be initialized with a default value
-as well to make reflection work properly.
+parsing need to use this annotation. Also take a look in the test folder how lists and other 
+properties are initialized. For lists it's important to make an instance of the list and to 
+add the cast method to let the parser work. All other properties needs to be initialized with 
+a default value as well to make reflection work properly.
 
 Then you are all set and able to start the parsing. You can parse a JSON string
 using the following method:

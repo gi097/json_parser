@@ -69,6 +69,14 @@ void main() {
     expect(9, buffer[1].marks[0].mark);
   });
 
+  test('test primitive array', () {
+    String json = '[{ "latlng":[4.5, 6.2] }]';
+    JsonParser parser = new JsonParser();
+    List buffer = parser.parseJson<DataClass>(json);
+    expect(4.5, buffer[0].latlng[0]);
+    expect(6.2, buffer[0].latlng[1]);
+  });
+
   test('test an invalid json input', () {
     int json = 0;
     bool exception = false;

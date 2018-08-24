@@ -21,6 +21,12 @@ class DataClass {
   set marks(List list) {
     _marks = list.cast<Mark>();
   }
+
+  List<double> _latlng = [];
+  List<double> get latlng => _latlng;
+  set latlng(List list) {
+    _latlng = list.cast<double>();
+  }
 }
 
 @reflectable
