@@ -106,7 +106,3 @@ Note that you **MUST** specify a type when calling the parse method.
 
 If all goes well, `instance` will automatically contain all your values specified
 in the JSON.
-
-## TODO's
-Currently the parser is only being tested on primitive properties. Later
-we will test and add support for more complex types such as nested objects.
