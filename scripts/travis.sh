@@ -27,6 +27,9 @@ echo "Analyzing the extracted Dart libraries."
 
 if [ "$COVERALLS_TOKEN" ]; then
   echo "Found coveralls key. Starting coveralls process..."
+
+  dart --enable-asserts test/json_parser_test.dart
+
   ../flutter/bin/flutter packages pub global activate dart_coveralls
   ../flutter/bin/flutter packages pub global run dart_coveralls report \
     --token $COVERALLS_TOKEN \
