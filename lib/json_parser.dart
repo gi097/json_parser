@@ -51,19 +51,12 @@ class JsonParser {
   }
 
   dynamic _parseJsonObjectInternal(dynamic input, Type type) {
-    Map<String, dynamic> parsed;
-    if (input is String) {
-      parsed = jsonDecode(input);
-    } else if (input is Map) {
-      parsed = input;
-    }
-
     ClassMirror classMirror = reflectable.reflectType(type);
     dynamic instance = classMirror.newInstance("", []);
 
     // Map values to the specified instance of the object.
     InstanceMirror instanceMirror = reflectable.reflect(instance);
-    parsed.forEach((k, v) {
+    input.forEach((k, v) {
       // This is a very ugly workaround since Dart has lots of limitations
       // regarding to types in Lists. Since we can only get a full name of a
       // List instance, we need to compare it to the declared reflectable
