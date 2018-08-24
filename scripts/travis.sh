@@ -15,6 +15,10 @@ dart --version
 
 ../flutter/bin/flutter packages get
 
+echo "Installing coveralls-lcov"
+
+gem install coveralls-lcov
+
 echo "Generating code for reflection."
 
 ../flutter/bin/flutter packages pub run build_runner build
@@ -23,17 +27,4 @@ echo "Analyzing the extracted Dart libraries."
 
 ../flutter/bin/flutter analyze lib test
 
-../flutter/bin/flutter test
-
-if [ "$COVERALLS_TOKEN" ]; then
-  echo "Found coveralls key. Starting coveralls process..."
-
-  dart --enable-asserts test/json_parser_test.dart
-
-  ../flutter/bin/flutter packages pub global activate dart_coveralls
-  ../flutter/bin/flutter packages pub global run dart_coveralls report \
-    --token $COVERALLS_TOKEN \
-    --retry 2 \
-    --exclude-test-files \
-    test/json_parser_test.dart
-fi
+../flutter/bin/flutter test --coverage

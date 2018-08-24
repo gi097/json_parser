@@ -10,3 +10,8 @@ addons:
       - libstdc++6
 before_install: ./scripts/before_install.sh
 script: ./scripts/travis.sh
+after_success:
+  - coveralls-lcov coverage/lcov.info
+cache:
+  directories:
+    - $HOME/.pub-cache
