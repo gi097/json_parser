@@ -1,3 +1,6 @@
+## [0.1.3] - 25-08-2018
+* Improved README
+
 ## [0.1.2] - 24-08-2018
 * Several code cleanups
 * Improved README

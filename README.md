@@ -5,20 +5,20 @@
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
 Flutter does not provide support for auto mapping JSON to object instances.
-This project is an attempt to make reflection work on Flutter. Using reflection we
-are able to parse a JSON string and map it's values to an instance of a Dart object.
+This project makes reflection work on Flutter. Using reflection we are able 
+to parse a JSON string and map it's values to an instance of a Dart object.
 
 ## Getting started
 First of all add the following dependencies to your `pubspec.yaml`:
 
 ```
 dependencies:
-  json_parser: 0.1.2
+  json_parser: ^0.1.3
   build_runner: 0.8.3
 ```
 
 Every Flutter/Dart application has a `main()` entry point. In that method
-you need to add at least the following:
+you need to add call the following method:
 
 ```dart
 void main() {
@@ -80,20 +80,49 @@ class DataClass {
 ```
 
 Note the usage of `@reflectable`. All your classes which will be used for JSON
-parsing need to use this annotation. Also take a look in the test folder how lists and other 
-properties are initialized. For lists it's important to make an instance of the list and to 
-add the cast method to let the parser work. All other properties needs to be initialized with 
-a default value as well to make reflection work properly.
+parsing need to use this annotation. All the properties in a reflectable class 
+needs to be initialized with a default value to let the parser know the
+instance types during runtime.
 
-Then you are all set and able to start the parsing. You can parse a JSON string
-using the following method:
+Lists have a different approach. You need to declare a `get` and `set` body for 
+them. Since Dart can't set a value of type `List<dynamic>` to a `List<YourClass>`,
+you need to cast it manually in your class. Make sure all your lists look like
+the following example:
+
+```dart
+List<Mark> _marks = [];
+List<Mark> get marks => _marks;
+set marks(List list) {
+  _marks = list.cast<Mark>();
+}
+```
+
+If you have binary data, think of a `byte[]` in C# or Java, you need to use
+`Uint8List`. You can initialize it like the following:
+
+```dart
+Uint8List data = new Uint8List(0);
+```
+
+When the parser detects a `Uint8List` instance, it will expect data in your
+json to be encoded as `Base64`. It will be parsed automatically.
+
+If you have set all the properties correctly, you are able to start the parsing. 
+You can parse a JSON string using the following method:
 
 ```dart
 JsonParser parser = new JsonParser();
 DataClass instance = parser.parseJson<DataClass>(json);
 ```
 
-Note that you **MUST** specify a type when calling the parse method.
+Note that you **MUST** specify the object type when calling the parse method. 
+If you are expecting a list as return type, you will need to declare it as the 
+following example:
 
-If all goes well, `instance` will automatically contain all your values specified
-in the JSON.
+```dart
+JsonParser parser = new JsonParser();
+List instance = parser.parseJson<DataClass>(json);
+```
+
+After the whole parsing process, `instance`  will contain all the values from
+your json input.
