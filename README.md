@@ -89,7 +89,8 @@ Then you are all set and able to start the parsing. You can parse a JSON string
 using the following method:
 
 ```dart
-DataClass instance = JsonParser.parseJson<DataClass>(json);
+JsonParser parser = new JsonParser();
+DataClass instance = parser.parseJson<DataClass>(json);
 ```
 
 Note that you **MUST** specify a type when calling the parse method.
