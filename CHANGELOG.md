@@ -1,3 +1,6 @@
+## [0.1.4] - 29-08-2018
+* Add support for Dart 2
+
 ## [0.1.3] - 25-08-2018
 * Improved README
 
