@@ -13,8 +13,8 @@ First of all add the following dependencies to your `pubspec.yaml`:
 
 ```
 dependencies:
-  json_parser: ^0.1.3
-  build_runner: 0.8.3
+  json_parser: ^0.1.4
+  build_runner: ^0.10.1+1
 ```
 
 Every Flutter/Dart application has a `main()` entry point. In that method
