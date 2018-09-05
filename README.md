@@ -13,7 +13,7 @@ First of all add the following dependencies to your `pubspec.yaml`:
 
 ```
 dependencies:
-  json_parser: ^0.1.4
+  json_parser: ^0.1.5
   build_runner: ^0.10.1+1
 ```
 
