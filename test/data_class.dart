@@ -13,6 +13,7 @@ class DataClass {
   int age = 0;
   String car = "";
   Uint8List data = new Uint8List(0);
+  Response response = new Response();
 
   /// You need to define lists like this. The cast method casts List<dynamic>
   /// to the correct type
@@ -32,4 +33,9 @@ class DataClass {
 @reflectable
 class Mark {
   int mark = 0;
+}
+
+@reflectable
+class Response {
+  int result = 0;
 }

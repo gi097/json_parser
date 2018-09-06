@@ -39,10 +39,12 @@ class JsonParser {
       throw new UnsupportedError('The specified JSON input type is invalid.');
     }
 
+    // Item is a single json object
     if (parsed is Map) {
       return _parseJsonObjectInternal(parsed, type);
     }
 
+    // Item is a json array, loop through it
     List buffer = new List(parsed.length);
     for (int i = 0; i < parsed.length; i++) {
       buffer[i] = _parseJsonObjectInternal(parsed[i], type);
@@ -64,14 +66,15 @@ class JsonParser {
       // TODO: Make this better
       var property = instanceMirror.invokeGetter(k);
 
-      if (v is List) {
-        classes.forEach((key, val) {
-          if ('List<$key>' == property.runtimeType.toString()) {
-            dynamic t = val.newInstance("", []);
-            v = _parseJson(v, t.runtimeType);
-          }
-        });
-      }
+      classes.forEach((key, val) {
+        if ('List<$key>' == property.runtimeType.toString()) {
+          dynamic t = val.newInstance("", []);
+          v = _parseJson(v, t.runtimeType);
+        } else if (key == property.runtimeType.toString()) {
+          dynamic t = val.newInstance("", []);
+          v = _parseJsonObjectInternal(v, t.runtimeType);
+        }
+      });
 
       // Decode base64, we can only check types using strings...
       if ('Uint8List' == property.runtimeType.toString()) {

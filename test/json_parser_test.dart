@@ -77,6 +77,17 @@ void main() {
     expect(6.2, buffer[0].latlng[1]);
   });
 
+  test('tests a json sub-object', () {
+    String json =
+        '{ "name":"Chen", "response": { "result": 5 } }';
+
+    JsonParser parser = new JsonParser();
+    DataClass instance = parser.parseJson<DataClass>(json);
+
+    expect("Chen", instance.name);
+    expect(5, instance.response.result);
+  });
+
   test('test an invalid json input', () {
     int json = 0;
     bool exception = false;
@@ -84,7 +95,7 @@ void main() {
     try {
       JsonParser parser = new JsonParser();
       parser.parseJson<DataClass>(json);
-    } catch(e) {
+    } catch (e) {
       exception = e is UnsupportedError;
     }
 
