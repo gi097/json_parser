@@ -15,5 +15,6 @@ dependencies:
   build_runner: ^0.10.1+1
 
 dev_dependencies:
+  test: ^1.5.1
   flutter_test:
     sdk: flutter
