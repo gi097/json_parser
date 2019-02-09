@@ -3,7 +3,7 @@
 /// Created by Giovanni Terlingen
 /// See LICENSE file for more information.
 ///
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'package:json_parser/json_parser.dart';
 import 'data_class.dart';
@@ -86,6 +86,30 @@ void main() {
 
     expect("Chen", instance.name);
     expect(5, instance.response.result);
+  });
+
+  test('test an invalid json input', () {
+    int json = 0;
+    bool exception = false;
+
+    try {
+      JsonParser parser = new JsonParser();
+      parser.parseJson<DataClass>(json);
+    } catch (e) {
+      exception = e is UnsupportedError;
+    }
+
+    expect(true, exception);
+  });
+
+  test('tests a json with ignored properties', () {
+    String json =
+        '{ "name":"Giovanni", "ignored": 5 }';
+
+    JsonParser parser = new JsonParser();
+    DataClass instance = parser.parseJson<DataClass>(json);
+
+    expect("Giovanni", instance.name);
   });
 
   test('test an invalid json input', () {

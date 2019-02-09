@@ -64,24 +64,34 @@ class JsonParser {
       // List instance, we need to compare it to the declared reflectable
       // items. If we find a match, we get the type of that subtype of a List.
       // TODO: Make this better
-      var property = instanceMirror.invokeGetter(k);
 
-      classes.forEach((key, val) {
-        if ('List<$key>' == property.runtimeType.toString()) {
-          dynamic t = val.newInstance("", []);
-          v = _parseJson(v, t.runtimeType);
-        } else if (key == property.runtimeType.toString()) {
-          dynamic t = val.newInstance("", []);
-          v = _parseJsonObjectInternal(v, t.runtimeType);
-        }
-      });
-
-      // Decode base64, we can only check types using strings...
-      if ('Uint8List' == property.runtimeType.toString()) {
-        v = base64Decode(v);
+      var property;
+      try {
+        property = instanceMirror.invokeGetter(k);
+      } catch (e) {
+        // Here we can get an exception if the property was not found,
+        // property remains null, so only execute below code if this was not
+        // the case.
       }
 
-      instanceMirror.invokeSetter(k, v);
+      if (property != null) {
+        classes.forEach((key, val) {
+          if ('List<$key>' == property.runtimeType.toString()) {
+            dynamic t = val.newInstance("", []);
+            v = _parseJson(v, t.runtimeType);
+          } else if (key == property.runtimeType.toString()) {
+            dynamic t = val.newInstance("", []);
+            v = _parseJsonObjectInternal(v, t.runtimeType);
+          }
+        });
+
+        // Decode base64, we can only check types using strings...
+        if ('Uint8List' == property.runtimeType.toString()) {
+          v = base64Decode(v);
+        }
+
+        instanceMirror.invokeSetter(k, v);
+      }
     });
 
     return instance;
