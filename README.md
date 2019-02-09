@@ -1,6 +1,5 @@
 # JSON Parser for Flutter
 [![Build Status](https://travis-ci.org/gi097/json_parser.svg?branch=develop)](https://travis-ci.org/gi097/json_parser)
-[![Stars](http://starveller.sigsev.io/api/repos/gi097/json_parser/badge)](http://starveller.sigsev.io/gi097/json_parser)
 [![Coverage Status](https://coveralls.io/repos/github/gi097/json_parser/badge.svg?branch=develop&service=github)](https://coveralls.io/github/gi097/json_parser?branch=develop)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
