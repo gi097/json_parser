@@ -3,9 +3,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/gi097/json_parser/badge.svg?branch=develop&service=github)](https://coveralls.io/github/gi097/json_parser?branch=develop)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
-Flutter does not provide support for auto mapping JSON to object instances.
+~~Flutter does not provide support for auto mapping JSON to object instances.
 This project makes reflection work on Flutter. Using reflection we are able 
-to parse a JSON string and map it's values to an instance of a Dart object.
+to parse a JSON string and map it's values to an instance of a Dart object.~~
+
+## You can now can and should use the official `json_serializable` plugin instead!
 
 ## Getting started
 First of all add the following dependencies to your `pubspec.yaml`:
