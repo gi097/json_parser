@@ -1,3 +1,7 @@
+## [0.1.9] - 15-07-2019
+
+* Move to MIT License, GPLv3 is too strict
+
 ## [0.1.8] - 10-02-2019
 
 * You can now use the offical `json_serializable` plugin

@@ -1,7 +1,7 @@
 # JSON Parser for Flutter
 [![Build Status](https://travis-ci.org/gi097/json_parser.svg?branch=develop)](https://travis-ci.org/gi097/json_parser)
 [![Coverage Status](https://coveralls.io/repos/github/gi097/json_parser/badge.svg?branch=develop&service=github)](https://coveralls.io/github/gi097/json_parser?branch=develop)
-[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ~~Flutter does not provide support for auto mapping JSON to object instances.~~
 ## You can now use the official `json_serializable` plugin instead!
